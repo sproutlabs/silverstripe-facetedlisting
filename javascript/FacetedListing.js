@@ -15,6 +15,16 @@ jQuery(function($) {
 		selects.attr('disabled', 'disabled');
 
 		$.get(url, data, function(data) {
+                  
+                   //ADDED because when we extend teh FacetedListingController twice the JSON was being returned as a strong  
+                    if((typeof data) == 'string' ) {
+                        var data =  JSON.parse(data);
+                         //window.console.log(data);
+                         //window.console.log(typeof data);
+                            
+                    }
+                    
+                    
 			loadFromObj(data);
 			selects.removeAttr('disabled');
 			form.removeClass('loading');
@@ -25,7 +35,14 @@ jQuery(function($) {
 	 * Loads faceting data from a JSON set.
 	 */
 	var loadFromObj = function(data) {
+                             
+                    
 		$.each(data, function(name, options) {
+                    
+              
+                    
+                    
+                    
 			var select   = $("select[name='" + name + "']");
 			var selected = select.val();
 
