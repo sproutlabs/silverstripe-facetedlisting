@@ -34,7 +34,6 @@ abstract class FacetedListingController extends Page_Controller {
 
 	public function init() {
 		parent::init();
-
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-metadata/jquery.metadata.js');
 		Requirements::javascript('facetedlisting/javascript/FacetedListing.js');
@@ -53,16 +52,16 @@ abstract class FacetedListingController extends Page_Controller {
 	public function handleView($request) {
 		$id    = $request->param('ItemID');
 		$class = $this->getItemClass();
-
 		if (!ctype_digit($id)) {
 			$this->httpError(400, 'Invalid item ID specified.');
 		}
 
 		if (!$item = DataObject::get_by_id($class, $id)) {
 			$this->httpError(404, 'Item not found.');
-		}
 
-		return new $this->itemController($this, $item);
+		}
+		
+                return new $this->itemController($this, $item);
 	}
 
 	// OVERLOAD THESE ----------------------------------------------------------
@@ -236,7 +235,7 @@ abstract class FacetedListingController extends Page_Controller {
 		} else {
 			$this->sourceItems = new DataObjectSet();
 		}
-
+                
 		// Add faceting data to the page.
 		$metadata = sprintf(
 			'<script id="listing-facets" type="data">%s</script>',
@@ -545,6 +544,7 @@ abstract class FacetedListingController extends Page_Controller {
 		$result = new DataObjectSet();
 		$items  = $this->getSourceItems();
 		$fields = $this->getListingFields();
+                
 
 		if ($items) foreach ($items as $item) {
 			$result->push($row = new DataObjectSet());

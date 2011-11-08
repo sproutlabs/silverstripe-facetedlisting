@@ -32,7 +32,10 @@ class FacetedSqlMap extends SQLMap {
 	}
 
 	/**
-	 * @return string
+	
+         * 
+         * 
+         *  * @return string
 	 */
 	public function getTitleField() {
 		return $this->titleField;
